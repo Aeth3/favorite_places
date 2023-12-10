@@ -83,53 +83,55 @@ class _EditPlaceState extends ConsumerState<EditPlace> {
       appBar: AppBar(
         title: const Text('Edit'),
       ),
-      body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(children: [
-          TextField(
-            decoration: const InputDecoration(labelText: 'Title'),
-            controller: _titleController,
-            style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          TextField(
-            decoration: const InputDecoration(labelText: 'Description'),
-            controller: _descriptionController,
-            style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          EditImageInput(
-            onPickImage: (image) {
-              _editedImage = image;
-            },
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          EditLocationInput(
-              onPickedLocation: (location) {
-                setState(() {
-                  _editedLocation = location;
-                });
+      body: SingleChildScrollView(
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(children: [
+            TextField(
+              decoration: const InputDecoration(labelText: 'Title'),
+              controller: _titleController,
+              style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            TextField(
+              decoration: const InputDecoration(labelText: 'Description'),
+              controller: _descriptionController,
+              style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            EditImageInput(
+              onPickImage: (image) {
+                _editedImage = image;
               },
-              onLoading: (loading) {
-                setState(() {
-                  isLoading = loading;
-                });
-              },
-              isSaving: isSaving),
-          ElevatedButton.icon(
-              onPressed: isLoading || isSaving ? null : _updatePlace,
-              icon: isLoading || isSaving
-                  ? const SizedBox(
-                      height: 16, width: 16, child: CircularProgressIndicator())
-                  : const Icon(Icons.add),
-              label: const Text('Update')),
-        ]),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            EditLocationInput(
+                onPickedLocation: (location) {
+                  setState(() {
+                    _editedLocation = location;
+                  });
+                },
+                onLoading: (loading) {
+                  setState(() {
+                    isLoading = loading;
+                  });
+                },
+                isSaving: isSaving),
+            ElevatedButton.icon(
+                onPressed: isLoading || isSaving ? null : _updatePlace,
+                icon: isLoading || isSaving
+                    ? const SizedBox(
+                        height: 16, width: 16, child: CircularProgressIndicator())
+                    : const Icon(Icons.add),
+                label: const Text('Update')),
+          ]),
+        ),
       ),
     );
   }
